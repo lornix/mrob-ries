@@ -3435,14 +3435,14 @@ char * file_read(const char * filename)
   char * base_ptr;
   size_t t_len;
 
-  in = fopen(filename, "rb");
+  in = fopen(filename, "r");
   if (in == NULL) {
     /* Try appending ".ries"
        (Allocation and UNIX compatibility by Markus Milleder, 20120428) */
     char * name_ext = (char *) malloc(strlen(filename) + 6); /* + ".ries\0" */
     if (name_ext) {
       sprintf(name_ext, "%s.ries", filename);
-      in = fopen(name_ext, "rb");
+      in = fopen(name_ext, "r");
       free(name_ext);
     }
   }
