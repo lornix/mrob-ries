@@ -4371,8 +4371,6 @@ s16 exec(metastack *ms, symbol op, s16 *undo_count, s16 do_dx)
 
     /* seft 'a' ( -- K ) symbols. For all constants the derivative is zero;
        for X the derivative is 1.0 */
-  case '0' :
-    rv = k_0; ms_push(ms, rv, (ries_dif) k_0, TYPE_INT); *undo_count = 1; break;
   case '1' :
     rv = k_1; ms_push(ms, rv, (ries_dif) k_0, TYPE_INT); *undo_count = 1; break;
   case 'f' :
