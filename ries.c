@@ -9592,14 +9592,14 @@ char * pa_defaults_path(void)
     pdp = (char *) malloc(sizeof(char) * (strlen(hd) + 100));
     if (pdp) {
       /* Copy the environment variable while adding all the rest */
-      sprintf(pdp, "-p%s%c%s", hd, sep, "ries_profile.txt");
+      sprintf(pdp, "-p%s%c%s", hd, sep, ".ries_profile");
       /* Try to open it */
       if (f = fopen(pdp+2,"r"), f) {
         /* Successful: close the file and return the string pointer */
         fclose(f); return pdp;
       }
-      /* That filename did not work; try again with ".ries_profile" */
-      sprintf(pdp, "-p%s%c%s", hd, sep, ".ries_profile");
+      /* That filename did not work; try again with "ries_profile.txt" */
+      sprintf(pdp, "-p%s%c%s", hd, sep, "ries_profile.txt");
       if (f = fopen(pdp+2,"r"), f) {
         fclose(f); return pdp;
       }
