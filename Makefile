@@ -17,6 +17,7 @@ CFLAGS+=-Wall -Wextra -Wunused
 #CFLAGS+=-O3
 # or not!
 CFLAGS+=-O0
+CFLAGS+=-flto
 # enable for gmon performance statistics
 #CFLAGS+=-pg
 # preserve everything used to create binary, verbose assembly comments
@@ -30,6 +31,7 @@ CFLAGS+=-O0
 #
 # das linker flags
 LDFLAGS+=-lm
+LDFLAGS+=-flto
 #
 CC:=gcc
 #
