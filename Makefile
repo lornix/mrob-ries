@@ -6,9 +6,7 @@
 # adhere to a higher standard!
 #CFLAGS+=-std=c99
 # pretty much always want debugging symbols included
-#CFLAGS+=-g3
 CFLAGS+=-ggdb3
-#CFLAGS+=-gstabs3
 # yell out all warnings and whatnot
 CFLAGS+=-Wall -Wextra -Wunused
 # make all warnings into errors
