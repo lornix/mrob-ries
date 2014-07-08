@@ -3439,7 +3439,7 @@ char * file_read(const char * filename)
   if (in == NULL) {
     /* Try appending ".ries"
        (Allocation and UNIX compatibility by Markus Milleder, 20120428) */
-    char * name_ext = (char *) malloc(strlen(filename) + 6); /* + ".ries\0" */
+    char * name_ext = malloc(strlen(filename) + 6); /* + ".ries\0" */
     if (name_ext) {
       sprintf(name_ext, "%s.ries", filename);
       in = fopen(name_ext, "r");
@@ -3455,7 +3455,7 @@ char * file_read(const char * filename)
   }
 
   buf_sz = FILE_READ_SIZE;
-  base_ptr = (char *) malloc(buf_sz);
+  base_ptr = malloc(buf_sz);
   t_len = 0;
  
   while (!feof(in) && !ferror(in)) {
@@ -3464,7 +3464,7 @@ char * file_read(const char * filename)
          reallocate */
       if (buf_sz > FILE_READ_MAX) break;
       buf_sz = buf_sz * 2;
-      base_ptr = (char *) realloc(base_ptr, buf_sz);
+      base_ptr = realloc(base_ptr, buf_sz);
     }
     {
       /* Now read a little bit more */
@@ -3476,7 +3476,7 @@ char * file_read(const char * filename)
   fclose(in);
 
   /* Reallocate again to free up the memory we didn't use. */
-  base_ptr = (char *) realloc(base_ptr, t_len + 1);
+  base_ptr = realloc(base_ptr, t_len + 1);
 
   /* It needs a trailing null byte */
   base_ptr[t_len] = 0;
@@ -3536,7 +3536,7 @@ void delimit_args(const char *rawbuf, size_t * nargs, char * * * argv)
     }
 
     /* Now n is the number of args, and we can allocate the argv */
-    av = (char **) malloc(n * sizeof(char *));
+    av = malloc(n * sizeof(char *));
     if (av == 0) {
       fprintf(stderr, "%s: Cannot alloate argv block.\n", g_argv0);
       print_end(-1);
@@ -3911,7 +3911,7 @@ void * my_alloc(size_t size)
   /* if we need to allocate, do so */
   if (do_alloc) {
     freesize = 0;
-    freepool = (char *) malloc(ALLOC_SIZE);
+    freepool = malloc(ALLOC_SIZE);
 
     /* did we get any? */
     if (freepool) {
@@ -9284,7 +9284,7 @@ void init2()
 
     /* Allocate a block to hold the "delta" values of all reported eqns */
     g_mtch_alloc = ((size_t)g_max_matches) * sizeof(ries_val);
-    g_nr_deltas = (ries_val *) malloc(g_mtch_alloc);
+    g_nr_deltas = malloc(g_mtch_alloc);
     if (g_nr_deltas == 0) {
       fprintf(stderr, "%s: Could not allocate %ld bytes for %ld matches.\n"
                "\n\n", g_argv0, (long)g_mtch_alloc, (long)g_max_matches);
@@ -9306,7 +9306,7 @@ void init2()
       g_mtch_alloc += (n_exprs_space * 4);
     }
 
-    g_matches = (symbol *) malloc(g_mtch_alloc * sizeof(symbol));
+    g_matches = malloc(g_mtch_alloc * sizeof(symbol));
     if (g_matches == 0) {
       fprintf(stderr, "%s: Could not allocate %ld bytes for %ld matches.\n"
                "\n\n", g_argv0, (long)(g_mtch_alloc * sizeof(symbol)),
@@ -9344,7 +9344,7 @@ int parse_target(char *str)
 
   /* Copy the string, leaving out any blank spaces and changing ',' to '.' */
   slen = strlen(str);
-  s = (char *) malloc(slen+1);
+  s = malloc(slen+1);
   {
     unsigned int i, j;
     for(i=0, j=0; i<slen; i++) {
@@ -9589,7 +9589,7 @@ char * pa_defaults_path(void)
     /* Allocate enough space to copy the directory, plus a leading "-p",
        a directory separator character '/' or '\\', and filename e.g.
        "ries_profile.txt" plus trailing null */
-    pdp = (char *) malloc(sizeof(char) * (strlen(hd) + 100));
+    pdp = malloc(sizeof(char) * (strlen(hd) + 100));
     if (pdp) {
       /* Copy the environment variable while adding all the rest */
       sprintf(pdp, "-p%s%c%s", hd, sep, ".ries_profile");
